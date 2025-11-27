@@ -90,7 +90,7 @@ contract LotteryTest is Test {
 
         // Проверим, что раунд завершён
         uint256 finishedRound = lottery.currentRoundId() - 1;
-        (, , address winner, , , ) = lottery.rounds(finishedRound);
+        (, , address winner, , , , ) = lottery.rounds(finishedRound);
 
         assertTrue(
             winner == playerA || winner == playerB,
@@ -98,7 +98,7 @@ contract LotteryTest is Test {
         );
 
         // Проверим что pot = 0
-        (uint256 pot, , , ) = lottery.rounds(finishedRound);
+        (uint256 pot, , , , , ,) = lottery.rounds(finishedRound);
         assertEq(pot, 0);
     }
 
@@ -140,7 +140,7 @@ contract LotteryTest is Test {
 
         uint256 newRound = lottery.currentRoundId();
 
-        (, , uint256 ticketsSold, , , , ) = lottery.rounds(newRound);
+        (, uint256 ticketsSold, , , , ,) = lottery.rounds(newRound);
         assertEq(ticketsSold, 0);
     }
 }
